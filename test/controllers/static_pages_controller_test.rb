@@ -25,4 +25,9 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", "about | #{@base_title}"
   end
 
+  test "项目跟路径" do
+    get root_url
+    assert_response :success
+  end
+
 end
