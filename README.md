@@ -21,4 +21,4 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+* commit中包含 "@体会" 关键字的提交,在提交内容中包含了对本次或近几次提交内容的感触,后期将通过脚本将体会内容及版本号提取出来.
