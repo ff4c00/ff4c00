@@ -29,6 +29,14 @@ h2 {
   font-weight: normal;
   color: #777;
 }
+
+a {
+  &:hover { text-decoration: none; }
+}
+
+// Sass另一特性是支持变量允许用$符号自定义变量来避免重复代码
+$a_default_color: #555;
+$a_hover_default_color: #777;
 // 全局通用样式 end
 
 // logo样式
@@ -36,15 +44,32 @@ h2 {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #777;
+  color: $a_hover_default_color;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
+  // 在嵌套中当需要引入父级元素时用&号实现,即 #logo:hover -> &:hover
+  // 把scss转换成css时,scss会把 &:hover 编译成 #logo:hover
+  &:hover { color: $a_hover_default_color; }
 }
 
-#logo:hover {
+// 页脚样式
+// Sass语言(样式表编写语言,支持scss格式,官网:http://sass-lang.com)支持嵌套,可以更加形象的展示嵌套元素样式的关系
+.footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
   color: #777;
-  text-decoration: none;
-}
 
+  a {
+    color: $a_default_color;
+    &:hover { color: $a_hover_default_color; }
+  }
+
+  small {
+    text-align: center;
+    margin: 3px auto;
+  }
+
+}
