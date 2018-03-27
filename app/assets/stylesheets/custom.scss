@@ -2,6 +2,10 @@
 @import "bootstrap";
 
 // 全局通用样式 start
+// Sass另一特性是支持变量允许用$符号自定义变量来避免重复代码
+$a_default_color: #555;
+$a_hover_default_color: #777;
+
 body { padding-top: 60px; }
 
 section { overflow: auto; }
@@ -34,9 +38,7 @@ a {
   &:hover { text-decoration: none; }
 }
 
-// Sass另一特性是支持变量允许用$符号自定义变量来避免重复代码
-$a_default_color: #555;
-$a_hover_default_color: #777;
+
 // 全局通用样式 end
 
 // logo样式
