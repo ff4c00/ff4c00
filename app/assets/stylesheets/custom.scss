@@ -51,7 +51,7 @@ a {
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
-  // 在嵌套中当需要引入父级元素时用&号实现,即 #logo:hover -> &:hover
+  // 在嵌套中当需要引入父级元素时用&符号实现,即 #logo:hover -> &:hover
   // 把scss转换成css时,scss会把 &:hover 编译成 #logo:hover
   &:hover { color: $a_hover_default_color; }
 }

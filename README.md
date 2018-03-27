@@ -9,6 +9,6 @@
 # 自动测试
 ## guard自动测试
 ### 常用命令
-* 启动命令: `bundle exec guard`
+* 启动: `bundle exec guard`
 
 -----
