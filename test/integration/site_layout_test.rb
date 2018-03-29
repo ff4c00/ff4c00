@@ -28,12 +28,19 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "h1", "ff4c00"
 
     # 检查页面的标题是否和application辅助方法生成的一致
-    assert_select "title", full_title("home")
+    assert_select "title", full_title("首页")
     # 使用assert_equal方法(assert_equal 值一, 值二 通过"=="来判断是否一致)来检查上面内容
-    assert_equal full_title("home"), "home | ff4c00"
-    assert_equal "home | ff4c00", full_title("home")
+    assert_equal full_title("首页"), "首页 | ff4c00"
+    assert_equal "首页 | ff4c00", full_title("首页")
+    # 首页检查完毕
 
-    # 检查完毕
+    # 打开注册页面
+    get signup_path
+    # 检查页面标题
+    assert_select "title", full_title("注册")
+
+    # 注册页检查完毕
+
   end
 
 end
