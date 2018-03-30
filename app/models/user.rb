@@ -6,6 +6,7 @@ class User < ApplicationRecord
   # 推测: uniqueness: true 即为 uniqueness: {case_sensitive: true}的一种简写
   # 待深入: uniqueness 参数这里是怎么实现的?也就是说当case_sensitive指定为false时他是怎么指定将uniqueness为true的?
   validates(:email, presence: true, length: {maximum: 255}, format: {with: email_reg},uniqueness: {case_sensitive: false})
+  befor_save {self.email = self.email.downcase}
 
 
 end
