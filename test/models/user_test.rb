@@ -4,12 +4,14 @@ class UserTest < ActiveSupport::TestCase
 
   # setup 方法会在每个测试方法运行前执行
   def setup
-    @user = User.new(name: 'ff4c00', email: 'ff4c00@gmail.com')
+    @user = User.new(name: 'ff4c00', email: 'ff4c00@gmail.com', password: "poe&QuI09845k_xoP", password_confirmation: 'poe&QuI09845k_xoP')
   end
 
   test "user是否有效检查" do
     assert @user.valid?
   end
+
+  # 关于模型的驱动测试已字段分类进行编写
 
   test "name字段检查" do
     # 检查name是否为空
@@ -23,9 +25,11 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email字段检查" do
+    # 邮箱为空检查
     @user.email = "  "
     assert_not @user.valid?
 
+    # 邮箱长度检查
     @user.email = "f"*255 + "@gmail.com"
     assert_not @user.valid?
 
@@ -46,6 +50,32 @@ class UserTest < ActiveSupport::TestCase
     repetitor_user.email = @user.email.upcase
     assert_not repetitor_user.valid?
 
+    # befor_save前小写转换检查
+    setup
+    @user.email = 'mikeposner@163.com'
+    @user.email.upcase!
+    user_with_upcase_email = @user.dup
+    # 下面比较报错提示通过id没有找到user,怀疑user没有保存成功,在这里加了断言确实报错,于是加上了错误返回信息,提示email已被占用,虽然喝的头疼,但至少意识还是清醒的:)
+    assert @user.save, "#{@user.errors.messages}"
+    assert_equal user_with_upcase_email.email.downcase, @user.reload.email
+
+  end
+
+  test "password_digest字段检查" do
+    # 密码为空字符串检查
+    @user.password = @user.password_confirmation = " "
+    assert_not @user.valid?
+    # 符合长度限制的空字符串检查
+    @user.password = @user.password_confirmation = " " * 6
+    assert_not @user.valid?
+    # 非空字符串长度限制检查
+    @user.password = @user.password_confirmation = "q" * 5
+    assert_not @user.valid?
+    # 这里原本还想加一条长度符合标准的非空字符串检查即:
+      # @user.password = @user.password_confirmation = "q" * 5
+      # assert @user.valid?
+    # 要是这样写的话断言期望只能为true,那么这条测试无论则样都会通过,不符合测试驱动:遇红 -> 变绿 -> 重构的流程
+    # 不符合这个流程,也就说明这条测试是完全没有必要的
   end
 
 end
