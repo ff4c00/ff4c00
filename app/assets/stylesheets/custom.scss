@@ -75,3 +75,62 @@ a {
   }
 
 }
+
+// Sass的混入功能(打包一系列样式代码,供多次使用)
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+//开发模式下页面参数详情样式
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+// 侧边栏样式
+aside {
+  section.user_info { margin-top: 20px; }
+  section {
+    padding: 10px 0;
+    margin-top: 20px;
+    &:first-child {
+      border: 0;
+      padding-top: 0;
+    }
+    span {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1px;
+    }
+    h1 {
+      font-size: 1.4em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+      margin-top: opx;
+    }
+  }
+}
+
+// 头像样式
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
+.gravatar_edit { margin-top: 15px; }
+
+// 表单样式
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input { height: auto !important;}

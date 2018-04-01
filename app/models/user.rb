@@ -10,6 +10,7 @@ class User < ApplicationRecord
   # 将uniqueness: true -> uniqueness: {case_sensitive: false} 即可在校验唯一性的同时不区分大小写
   # 推测: uniqueness: true 即为 uniqueness: {case_sensitive: true}的一种简写
   # 待深入: uniqueness 参数这里是怎么实现的?也就是说当case_sensitive指定为false时他是怎么指定将uniqueness为true的?
+  # 待优化: 搭建一个邮箱系统
   validates(:email, presence: true, length: {maximum: 255}, format: {with: email_reg},uniqueness: {case_sensitive: false})
   before_save {self.email = self.email.downcase}
   # email字段 end
@@ -26,6 +27,7 @@ class User < ApplicationRecord
     # authenticate方法,由于验证用户输入密码和数据库中的密码哈希值是否一致,不同返回false,一致返回该user对象(可以用!!将其结果转为true或false)
   # 推测: 获得的这对虚拟属性是不是使用的ActiveRecord::Store对password_digest字段作为序列化的封装?
   # 推测: 用authenticate方法应该可以撞库,从而得到原始密码.
+  # 待优化: 引入第三方登录如:ruby-china,github,微信,QQ等.
   has_secure_password
   # 身份验证 end
 
