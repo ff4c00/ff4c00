@@ -140,6 +140,7 @@ input { height: auto !important;}
 // 错误提醒样式
 #error_explanation {
   ul {
+    // 待实现: 一个可以动态添加的颜色表,用于存放比较喜欢的颜色.
     color: $state-danger-text;
     margin: 0 0 30px 0;
   }
