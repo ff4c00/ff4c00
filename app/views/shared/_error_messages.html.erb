@@ -1,0 +1,14 @@
+<% if @user.errors.any? %>
+  <div id='error_explanation'>
+    <div class='alert alert-danger'>
+       表单提交过程中遇到<%= @user.errors.count%>个问题.
+    </div>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li>
+          <%= msg%>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

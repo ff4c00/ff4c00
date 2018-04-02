@@ -3,7 +3,9 @@
 
 // 全局通用样式 start
 // Sass另一特性是支持变量允许用$符号自定义变量来避免重复代码
+// a标签颜色
 $a_default_color: #555;
+// a标签hover颜色
 $a_hover_default_color: #777;
 
 body { padding-top: 60px; }
@@ -134,3 +136,18 @@ input, textarea, select, .uneditable-input {
 }
 
 input { height: auto !important;}
+
+// 错误提醒样式
+#error_explanation {
+  ul {
+    color: $state-danger-text;
+    margin: 0 0 30px 0;
+  }
+}
+
+// 出错时Rails会自动把有错误的字段包含在一个css类为field_width_errors的div元素中.
+.field_width_errors {
+  // 使用Sass的@extend函数引入Bootstrap的has-error类.
+  @extend .has-error;
+  .form-control { color: $state-danger-text; }
+}
