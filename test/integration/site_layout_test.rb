@@ -37,7 +37,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     # 打开注册页面
     get signup_path
     # 检查页面标题
-    assert_select "title", full_title("注册")
+    assert_select "title", full_title("用户注册")
 
     # 注册页检查完毕
 

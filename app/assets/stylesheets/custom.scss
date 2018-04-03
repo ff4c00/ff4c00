@@ -8,7 +8,10 @@ $a_default_color: #555;
 // a标签hover颜色
 $a_hover_default_color: #777;
 
-body { padding-top: 60px; }
+body {
+  padding-top: 60px;
+  margin: 0 16%;
+}
 
 section { overflow: auto; }
 
@@ -140,7 +143,7 @@ input { height: auto !important;}
 // 错误提醒样式
 #error_explanation {
   ul {
-    // 待实现: 一个可以动态添加的颜色表,用于存放比较喜欢的颜色.
+    // 待实现: 一个可以动态添加的颜色表,用于存放比较喜欢的颜色.需求:1.页面生成颜色缩略图2.点击某个颜色显示大图3.点击颜色某一区域复制颜色对应的16进制代码
     color: $state-danger-text;
     margin: 0 0 30px 0;
   }
