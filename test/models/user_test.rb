@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
 
   # setup 方法会在每个测试方法运行前执行
   def setup
-    @user = User.new(name: 'ff4c00', email: 'ff4c00@gmail.com', password: "poe&QuI09845k_xoP", password_confirmation: 'poe&QuI09845k_xoP')
+    @user = User.new(name: 'ff4c0', email: 'ff4c0@gmail.com', password: "poe&QuI09845k_xoP", password_confirmation: 'poe&QuI09845k_xoP')
   end
 
   test "user是否有效检查" do

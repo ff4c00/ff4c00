@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   # name字段
-  # 待优化: 对name字段进行限制,不允许包含:admin,root,king,queen,fuxi,mikeposner等保留字
+  # 待优化: 对name字段进行限制,不允许包含:admin,root,king,queen,fuxi,ff4c00,该用户已注销等保留字
   validates(:name, presence: true, length: {maximum: 50})
   # name字段 end
 
@@ -38,6 +38,15 @@ class User < ApplicationRecord
 
 
   # password字段 end
+
+  # 返回指定字符串的哈希摘要
+  def self.digest(string)
+    # cost是耗时因子,决定计算哈希值时消耗的资源,耗时因子的值越大,由哈希值破解出原密码的难度越大
+    # 这行代码的作用是在测试时使用最小值,生产环境使用普通值
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+
+    BCrypt::Password.create(string, cost: cost)
+  end
 
 
 
