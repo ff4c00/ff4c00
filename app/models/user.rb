@@ -36,8 +36,11 @@ class User < ApplicationRecord
   validates(:password, length: {minimum: 6}, presence: true)
   # password字段验证 end
 
-
   # password字段 end
+
+  attr_accessor :remember_token
+
+
 
   # 返回指定字符串的哈希摘要
   def self.digest(string)
@@ -48,6 +51,26 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
+  def self.new_token
+    # Ruby标准库中SecureRandom模块的urlsafe_base64方法用于返回长度为22位的随机字符串
+    # 包含A-Z,a-z,0-9,_,-,即每一位都有64中可能
+    SecureRandom.urlsafe_base64
+  end
+
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest,User.digest(remember_token))
+  end
+
+  def authenticated?(remember_token)
+    # 2.3.0 :004 > remember_digest = user.remember_digest
+    #  => "$2a$10$w47m6xTLo5pfVGOWGZGrtOVEY8D5/bGYYybi78DGdEsfeUHKIHG7q"
+    # 2.3.0 :005 > BCrypt::Password.new(remember_digest)
+    #  => "$2a$10$w47m6xTLo5pfVGOWGZGrtOVEY8D5/bGYYybi78DGdEsfeUHKIHG7q"
+    # 待深入: 这里new一下只是为了获得is_password?方法? 随便new一个值会报错,有点反应不过来了,傻了傻了...
+
+    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
 
 
 end

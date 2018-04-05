@@ -28,4 +28,14 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def remember(user)
+    user.remember
+    # 创建持久会话的方法是吧签名及加密后的用户id和记忆令牌作为持久cookie存入浏览器
+    # 一般签名和加密是两个不同操作,单从Rails4开始,signed方法默认既签名又加密
+    # cookie可以视作一个散列,一个是value,另一个是可选的expires(过期时间)
+    # Rails应用经常使用20年过期的cookie(make茅台),permanent就是用来创建过期时间为20年后的方法
+    cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
+  end
+
 end
