@@ -11,5 +11,8 @@ class ActiveSupport::TestCase
   # application辅助文件引入测试辅助文件后可以在测试时使用application辅助文件中的方法
   include ApplicationHelper
 
-  # Add more helper methods to be used by all tests here...
+  # 判断用户是否登录
+  def is_logged_in?
+    !session[:user_id].nil?
+  end
 end
