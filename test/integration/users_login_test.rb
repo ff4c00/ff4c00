@@ -29,8 +29,10 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   test "测试布局变化" do
 
+    # 登录后布局变化
     get login_path
     post login_path, params: {session: {email: @user.email, password: 'password'}}
+    assert is_logged_in?
     assert_redirected_to user_url(@user)
     # 访问重定向后的目标地址
     follow_redirect!
@@ -38,6 +40,15 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', login_path, count: 0
     assert_select 'a[href=?]', logout_path
     assert_select 'a[href=?]', user_path(@user)
+
+    # 退出后布局变化
+    delete logout_path
+    assert_not is_logged_in?
+    assert_redirected_to root_path
+    follow_redirect!
+    assert_select 'a[href=?]', login_path, count: 1
+    assert_select 'a[href=?]', logout_path, count: 0
+    assert_select 'a[href=?]', user_path(@user), count: 0
 
   end
 

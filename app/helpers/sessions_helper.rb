@@ -4,6 +4,11 @@ module SessionsHelper
     session[:user_id] = user.id
   end
 
+  def log_out
+    session.delete(:user_id)
+    @current_user = nil
+  end
+
   def current_user
     # 如果用户id不存在,find方法会抛出异常,find_by方法会返回nil
     # 2.3.0 :021 >   User.find_by_id(3)
