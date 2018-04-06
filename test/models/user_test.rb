@@ -78,4 +78,10 @@ class UserTest < ActiveSupport::TestCase
     # 不符合这个流程,也就说明这条测试是完全没有必要的
   end
 
+  # 集成测试中很难模拟两个不同浏览器中的操作,但这个问题的本质就是remember_digest为nil的user调用了authenticated?方法,而setup中生成的@user改属性也是为nil的
+  # 在authenticated?方法中BCrypt::Password.new(remember_digest)时就已经报错了,所以传参是什么并不重要
+  test "用户多浏览器登录退出问题" do
+   assert_not @user.authenticated?('')
+  end
+
 end

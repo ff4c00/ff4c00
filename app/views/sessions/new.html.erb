@@ -11,6 +11,11 @@
       <%= f.label :'密码' %>
       <%= f.password_field :password, class: 'form-control' %>
 
+      <%= f.label :remember_me, class: 'checkbox inline' do %>
+        <%= f.check_box :remember_me %>
+        <span>信任该设备,长期保持登录状态</span>
+      <% end %>
+
       <%= f.submit '登录', class: 'btn btn-primary' %>
 
     <% end %>

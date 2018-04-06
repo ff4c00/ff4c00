@@ -57,9 +57,15 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
+  # 数据库存储记忆令牌的哈希摘要
   def remember
     self.remember_token = User.new_token
-    update_attribute(:remember_digest,User.digest(remember_token))
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
+
+  # 忘记用户时将数据库中记忆令牌的哈希摘要清空
+  def forget
+    update_attribute(:remember_digest, nil)
   end
 
   def authenticated?(remember_token)
@@ -69,7 +75,8 @@ class User < ApplicationRecord
     #  => "$2a$10$w47m6xTLo5pfVGOWGZGrtOVEY8D5/bGYYybi78DGdEsfeUHKIHG7q"
     # 待深入: 这里new一下只是为了获得is_password?方法? 随便new一个值会报错,有点反应不过来了,傻了傻了...
 
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    return false if remember_token.blank?
+    BCrypt::Password.new(remember_digest).is_password?(remember_token) #或者rescue false
   end
 
 

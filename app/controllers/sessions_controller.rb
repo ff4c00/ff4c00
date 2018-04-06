@@ -6,18 +6,18 @@ class SessionsController < ApplicationController
   def create
 
     session = params[:session]
-    user = User.find_by_email(session[:email].downcase)
-    bingo_password = user&.authenticate(session[:password])
+    @user = User.find_by_email(session[:email].downcase)
+    bingo_password = @user&.authenticate(session[:password])
 
-    if user && bingo_password
+    if @user && bingo_password
 
-      log_in(user)
-      remember(user)
+      log_in(@user)
+      session[:remember_me] == '1' ? remember(@user) : forget(@user)
       # user_url(user) #=> "http://localhost:4000/users/7" # 单数并以user为参数是show页面链接
       # users_url #=> "http://localhost:4000/users" # 复数是user列表页面链接
-      redirect_to user_url(user)
+      redirect_to user_url(@user)
 
-    elsif user
+    elsif @user
 
       # 闪现消息在一个生命周期内是持续存在的,而重新渲染页面(render)不算是一次新请求
       # 所以重新新渲染页面后闪现消息在打开其他页面后仍然存在
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
       flash.now[:danger] = "密码输入有误"
       render 'new'
 
-    elsif !user
+    elsif !@user
       flash[:danger] = "该邮箱尚未注册,完成注册即可登录"
       redirect_to signup_path
     else
@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
+    log_out if logged_in?
     redirect_to root_path
   end
 end
