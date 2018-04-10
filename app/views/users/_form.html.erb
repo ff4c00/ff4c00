@@ -1,0 +1,19 @@
+<!--
+  new页面和edit页面使用了相同的form_for(@user)
+  Rails是怎么知道创建用户要发送POST请求,修改用户发送PATCH请求:
+  是通过Active Record提供的new_record?布尔值方法检测用户是新建的还是已经存在于数据库中.
+ -->
+<%= form_for(@user) do |f| %>
+  <%= render 'shared/error_messages'%>
+
+  <%= f.label :'名称' %>
+  <%= f.text_field :name, class: 'form-control'%>
+  <%= f.label :'邮箱' %>
+  <%= f.email_field :email, class: 'form-control'%>
+  <%= f.label :'密码' %>
+  <%= f.password_field :password, class: 'form-control'%>
+  <%= f.label :'确认密码' %>
+  <%= f.password_field :password_confirmation, class: 'form-control'%>
+  <%= f.submit yield(:button_text), class: 'btn btn-primary' %>
+
+<% end %>

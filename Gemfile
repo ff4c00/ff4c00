@@ -35,9 +35,15 @@ gem 'bootstrap-sass', '3.3.6'
 # 用于计算密码哈希摘要
 gem 'bcrypt', '3.1.11'
 
+# 用于分页
+# 教程使用的是:will_paginate,但我本地安装后启动服务报错,尝试解决未果,换个思路解决问题,提交代码碎觉觉,困死了...
+gem 'kaminari', '~> 1.1', '>= 1.1.1'
+
 group :development, :test do
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+
 end
 
 group :test do
@@ -48,12 +54,17 @@ group :test do
 end
 
 group :development do
+
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # 用于批量创建示例用户(使用半真实的名字和邮箱)
+  gem 'faker', '1.6.3'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

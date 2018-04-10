@@ -33,7 +33,7 @@ class User < ApplicationRecord
 
   # password字段验证
   # 待优化: 对密码进行更多限制已增强密码强度,如:必须包含英文大小写,数字和特殊符号
-  validates(:password, length: {minimum: 6}, presence: true)
+  validates(:password, length: {minimum: 6}, presence: true, allow_nil: true)
   # password字段验证 end
 
   # password字段 end

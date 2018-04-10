@@ -3,3 +3,8 @@ ff4c00:
   name: ff4c00
   email: ff4c00@gmail.com
   password_digest: <%= User.digest('password')%>
+
+bad_guy:
+  name: hijack
+  email: hijack@example.com
+  password_digest: <%= User.digest('password')%>

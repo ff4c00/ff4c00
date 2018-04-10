@@ -21,6 +21,20 @@ class ActiveSupport::TestCase
     session[:user_id] = user.id
   end
 
+  def logout_change
+    delete logout_path
+    assert_not is_logged_in?
+    assert_redirected_to root_path
+    follow_redirect!
+    assert_select 'a[href=?]', login_path, count: 1
+    assert_select 'a[href=?]', logout_path, count: 0
+    assert_select 'a[href=?]', user_path(@user), count: 0
+  end
+
+  def check_session_remember_url_clean
+    assert_not session[:remember_url].present?
+  end
+
 end
 
 class ActionDispatch::IntegrationTest

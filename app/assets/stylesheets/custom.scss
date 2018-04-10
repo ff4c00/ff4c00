@@ -43,7 +43,8 @@ a {
   &:hover { text-decoration: none; }
 }
 
-.mt-10{ margin-top: 10px; }
+.mt-10 { margin-top: 10px; }
+.mt-40 { margin-top:40px; }
 
 // 全局通用样式 end
 
@@ -169,4 +170,15 @@ input { height: auto !important;}
   // 使用Sass的@extend函数引入Bootstrap的has-error类.
   @extend .has-error;
   .form-control { color: $state-danger-text; }
+}
+
+// 用户列表页面
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
 }

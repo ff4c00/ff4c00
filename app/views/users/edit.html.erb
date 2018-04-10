@@ -1,0 +1,15 @@
+<% provide(:title, (title = '修改个人资料'))%>
+<% button_text %>
+<h1><%= title %></h1>
+<div class='col-md-6 col-md-offset-3'>
+
+  <div class='gravatar_edit'>
+    <%= gravatar_for user:@user %>
+    <%= link_to '修改头像', 'http://gravatar.com/emails', target: '_blank'%>
+  </div>
+
+  <%= blank_div(div_class:'mt-40') %>
+
+    <%= render 'form' %>
+
+</div>

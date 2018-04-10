@@ -35,6 +35,10 @@ module SessionsHelper
 
   end
 
+  def current_user?(user)
+    user == current_user
+  end
+
   def logged_in?
     !current_user.nil?
   end
@@ -53,6 +57,19 @@ module SessionsHelper
     user.forget
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
+  end
+
+  # 当缺失权限或条件的情况下访问某一路径
+  # 获取相应权限或条件后重新重定向到原目标路径
+  def store_location
+    # request.original_url用于获取当前所请求页面的地址
+    session[:remember_url] = request.original_url if request.get?
+  end
+
+  def redirect_back_or(default)
+    redirect_to(session[:remember_url] || default)
+    # 除非明确使用了return或者到了方法的末尾,否则重定向后的代码依然会执行
+    session.delete(:remember_url)
   end
 
 end

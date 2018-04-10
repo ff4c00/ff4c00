@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       session[:remember_me] == '1' ? remember(@user) : forget(@user)
       # user_url(user) #=> "http://localhost:4000/users/7" # 单数并以user为参数是show页面链接
       # users_url #=> "http://localhost:4000/users" # 复数是user列表页面链接
-      redirect_to user_url(@user)
+      redirect_back_or(user_url(@user))
 
     elsif @user
 
