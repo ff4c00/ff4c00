@@ -4,6 +4,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:ff4c00)
+    @bad_guy = users(:bad_guy)
   end
 
   test "登录页面" do
@@ -23,6 +24,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     check_session_remember_url_clean
 
   end
+
+	test '禁止通过PATCH更新请求修改admin属性检查' do 
+		log_in_as(@bad_guy)
+		assert_not @bad_guy.admin?
+		patch user_path(@bad_guy), params: {user: {admin: true}}
+		assert_not @bad_guy.reload.admin?
+	end 
 
 
 

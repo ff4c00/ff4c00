@@ -19,4 +19,5 @@ module ApplicationHelper
     provide(:button_text, text)
   end
 
+
 end

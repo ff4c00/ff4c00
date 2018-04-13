@@ -1,4 +1,4 @@
-100.times do
+99.times do
 
   name = Faker::Name.name
   email = (Faker::Internet.email).downcase

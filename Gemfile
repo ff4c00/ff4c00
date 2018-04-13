@@ -44,6 +44,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 
+  # 用于批量创建示例用户(使用半真实的名字和邮箱)
+  gem 'faker', '1.6.3'
+
 end
 
 group :test do
@@ -62,8 +65,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  # 用于批量创建示例用户(使用半真实的名字和邮箱)
-  gem 'faker', '1.6.3'
 
 end
 

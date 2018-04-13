@@ -13,7 +13,10 @@ class UsersController < ApplicationController
       log_in(@user)
       # 发送欢迎的flash信息
       flash[:success] = "注册成功,欢迎你呦:)"
-      # redirect_to user_path(@user) #=> Redirected to http://localhost:4000/users/3"<html><body>You are being <a href=\"http://localhost:4000/users/3\">redirected</a>.</body></html>"
+      # redirect_to user_path(@user) #=> 
+			# Redirected to http://localhost:4000/users/3"
+			# <html><body>You are being <a href=\"http://localhost:4000/users/3\">
+			# redirected</a>.</body></html>"
       redirect_to user_path(@user)
     else
       render 'new'
@@ -40,12 +43,16 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all.page(params[:page])
+		# 待优化: 分页全局调用统一方法,避免分页条数不一致,后期替换也方便
+		@users = User.page(params[:page]).per(30)
   end
 
   private
 
     def user_params
+			# 健壮参数的重要意义在于:只允许通过请求传入可安全编辑的属性
+			# user模型包含一个admin属性,如果没有健壮参数的限制后果就是,任何人都可以在PATCH更新请求中将某一用户设置为管理员,如:
+			# patch /users/:id?admin=1
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 

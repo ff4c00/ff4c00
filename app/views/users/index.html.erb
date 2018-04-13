@@ -2,12 +2,10 @@
 <h1><%= title %></h1>
 
 <ul class='users'>
-  <% @users.each do |user| %>
-    <li>
-      <%= gravatar_for(user: user)%>
-      <%= link_to user.name, user_path(user)%>
-    </li>
-  <% end %>
+	<!-- 这里render的参数不在是指定局部视图的字符串,
+	rails会通过变量的类名推断出局部视图的名称,
+	自动遍历并使用相对应的局部视图渲染每个对象 -->
+	<%= render @users %>
 </ul>
-2
+
 <%= paginate @users %>

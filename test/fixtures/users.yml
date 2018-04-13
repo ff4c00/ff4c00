@@ -3,6 +3,7 @@ ff4c00:
   name: ff4c00
   email: ff4c00@gmail.com
   password_digest: <%= User.digest('password')%>
+  admin: true
 
 bad_guy:
   name: hijack
