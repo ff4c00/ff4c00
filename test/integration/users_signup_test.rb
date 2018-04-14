@@ -28,6 +28,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     get signup_path
 
     # 这里期望的结果是User的数量发生变化并且变化的数量为1
+		# 如果期望数量减少,比如删除用户参数为:-1
     assert_difference 'User.count', 1 do
       post users_path, params: {user: { name: 'mikeposner', email: 'mikeposner@163.com', password: 'oiU&hgt%009_kiou', password_confirmation: 'oiU&hgt%009_kiou'}}
     end

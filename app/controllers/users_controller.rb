@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :index]
+  before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
   before_action :correct_user, only: [:edit, :update]
+	before_action :admin_user, only: :destroy
 
   def new
     @user = User.new
@@ -47,6 +48,19 @@ class UsersController < ApplicationController
 		@users = User.page(params[:page]).per(30)
   end
 
+	def destroy
+		@user = User.find(params[:id])
+    if current_user?(@user)
+			flash[:danger] = '禁止删除本人'
+			redirect_to users_path
+		else
+			@user.destroy 
+			flash[:success] = '用户已删除'
+			redirect_to users_path
+		end
+
+	end 
+
   private
 
     def user_params
@@ -73,5 +87,10 @@ class UsersController < ApplicationController
         redirect_to root_path
       end
     end
+
+				
+		def admin_user
+			redirect_to(root_path) unless current_user.admin?
+		end 
 
 end

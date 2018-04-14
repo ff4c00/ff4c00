@@ -7,6 +7,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @bad_guy = users(:bad_guy)
   end
 
+	def try_to_delete_user(url:)
+		assert_no_difference 'User.count' do 
+			delete user_path(@bad_guy)
+			assert_redirected_to url 
+		end
+	end 
+
   test "登录页面" do
     get signup_path
     assert_response :success
@@ -32,6 +39,16 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 		assert_not @bad_guy.reload.admin?
 	end 
 
+	test '无权限用户尝试发送删除用户请求' do
+		
+		# 未登录用户尝试发起删除请求
+		try_to_delete_user(url: login_url)
+
+		# 非管理员已登录用户尝试发起删除请求
+		log_in_as(@bad_guy)
+		try_to_delete_user(url: root_path)
+
+	end 
 
 
 end

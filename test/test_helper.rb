@@ -35,6 +35,10 @@ class ActiveSupport::TestCase
     assert_not session[:remember_url].present?
   end
 
+	def check_a_label(url:, text:, count: 1)
+		assert_select 'a[href=?]', url, text: text, count: count
+	end
+
 end
 
 class ActionDispatch::IntegrationTest

@@ -18,10 +18,8 @@ module SessionsHelper
     # 2.3.0 :022 > User.find(3)
     #   User Load (0.1ms)  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 3], ["LIMIT", 1]]
     # ActiveRecord::RecordNotFound: Couldn't find User with 'id'=3
-    # .
-    # .
-    # .
-    # .
+		# ...
+		
     if (user_id = session[:user_id])
       @current_user ||= User.find_by_id(user_id)
     # cookie.signed[:user_id]会自动解密cookie中的用户id
