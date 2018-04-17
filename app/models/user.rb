@@ -12,8 +12,8 @@ class User < ApplicationRecord
   # 待深入: uniqueness 参数这里是怎么实现的?也就是说当case_sensitive指定为false时他是怎么指定将uniqueness为true的?
   # 待优化: 搭建一个邮箱系统
   validates(:email, presence: true, length: {maximum: 255}, format: {with: email_reg},uniqueness: {case_sensitive: false})
-  before_save {self.email = self.email.downcase}
-  # email字段 end
+  before_save  :downcase_email
+	# email字段 end
 
   # password字段
 
@@ -38,6 +38,8 @@ class User < ApplicationRecord
 
   # password字段 end
 
+	# 记住用户
+	# 虚拟属性
   attr_accessor :remember_token
 
 
@@ -67,6 +69,18 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+	
+	# 记住用户 end 
+	
+	# 账户激活
+	attr_accessor :activation_token
+
+	before_create :create_activation_digest
+	
+	
+	
+	# 账户激活 end
+
 
   def authenticated?(remember_token)
     # 2.3.0 :004 > remember_digest = user.remember_digest
@@ -79,5 +93,15 @@ class User < ApplicationRecord
     BCrypt::Password.new(remember_digest).is_password?(remember_token) #或者rescue false
   end
 
+	private
+
+		def downcase_email
+			self.email = self.email.downcase
+		end
+
+		def create_activation_digest
+			self.activation_token = User.new_token
+			self.activation_digest = User.digest(self.activation_token)
+		end 
 
 end

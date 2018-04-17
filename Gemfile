@@ -39,6 +39,9 @@ gem 'bcrypt', '3.1.11'
 # 教程使用的是:will_paginate,但我本地安装后启动服务报错,尝试解决未果,换个思路解决问题,提交代码碎觉觉,困死了...
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 
+# 调用写在YAML里面的配置信息
+gem 'settingslogic', '~> 2.0', '>= 2.0.9'
+
 group :development, :test do
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
