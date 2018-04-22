@@ -81,16 +81,28 @@ class User < ApplicationRecord
 	
 	# 账户激活 end
 
-
-  def authenticated?(remember_token)
+  # 我个人比较喜欢用关键字传参,这样无论是可扩展性还是可读性都非常的高
+  def authenticated?(attribute:, token:)
     # 2.3.0 :004 > remember_digest = user.remember_digest
     #  => "$2a$10$w47m6xTLo5pfVGOWGZGrtOVEY8D5/bGYYybi78DGdEsfeUHKIHG7q"
     # 2.3.0 :005 > BCrypt::Password.new(remember_digest)
     #  => "$2a$10$w47m6xTLo5pfVGOWGZGrtOVEY8D5/bGYYybi78DGdEsfeUHKIHG7q"
     # 待深入: 这里new一下只是为了获得is_password?方法? 随便new一个值会报错,有点反应不过来了,傻了傻了...
 
-    return false if remember_token.blank?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token) #或者rescue false
+		# send 方法的作用是在指定对象上调用指定的方法,如: 
+		# 2.3.0 :006 > a = [1,2,3,4,5,6,7]
+    #  => [1, 2, 3, 4, 5, 6, 7]
+    # 2.3.0 :007 > a.length
+    #  => 7
+    # 2.3.0 :008 > a.send(:length)
+    #  => 7
+    # 2.3.0 :009 > a.send('length')
+    #  => 7
+    # 无论传参为符号还是字符串,插值的时候都会转为字符串 
+		digest = self.send(attribute)
+
+    return false if token.blank?
+    BCrypt::Password.new(digest).is_password?(token) #或者rescue false
   end
 
 	private

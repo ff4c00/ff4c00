@@ -1,5 +1,5 @@
 你好<%= @user.name %>,
-欢迎注册成为FF4C00的用户,点击下面的链接将激活你的用户来完成注册.
+	欢迎注册成为<%= Mailer.web_name %>的用户,点击下面的链接将激活你的用户来完成注册.
 <%= edit_account_activation_url(@user.activation_token, email: @user.email)%>
 
 

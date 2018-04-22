@@ -1,5 +1,6 @@
-<h1>User#account_activation</h1>
+<h1>帐号激活</h1>
+<p>你好<%= @user.name %>,</p>
+<p>欢迎注册成为<%= Mailer.web_name %>的用户,点击下面的链接将激活你的用户来完成注册.</p>
+<%= link_to '点击激活', edit_account_activation_url(@user.activation_token, email: @user.email)%>
 
-<p>
-  <%= @greeting %>, find me in app/views/user_mailer/account_activation.html.erb
-</p>
+

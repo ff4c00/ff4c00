@@ -1,6 +1,8 @@
 defaults: &defaults
   host: 'localhost:4000'
   protocol: 'https'
+  web_name: 'FF4C00'
+  mail_default_from: 'ff4c00@gmail.com'
 
 development:
   <<: *defaults

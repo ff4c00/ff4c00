@@ -10,15 +10,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # session中存储user_id
-      log_in(@user)
-      # 发送欢迎的flash信息
-      flash[:success] = "注册成功,欢迎你呦:)"
-      # redirect_to user_path(@user) #=> 
-			# Redirected to http://localhost:4000/users/3"
-			# <html><body>You are being <a href=\"http://localhost:4000/users/3\">
-			# redirected</a>.</body></html>"
-      redirect_to user_path(@user)
+
+			UserMailer.account_activation(@user).deliver_now 
+      flash[:info] = '请检查邮箱,根据激活邮件提示,完成账户激活:)'
+      redirect_to root_path
+
     else
       render 'new'
     end

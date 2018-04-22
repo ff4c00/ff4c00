@@ -25,7 +25,7 @@ module SessionsHelper
     # cookie.signed[:user_id]会自动解密cookie中的用户id
     else (user_id = cookies.signed[:user_id])
       user = User.find_by_id(user_id)
-      if user && user.authenticated?(cookies[:remember_token])
+      if user && user.authenticated?(attribute: :attribute_digest, token: cookies[:remember_token])
         log_in(user)
         @current_user = user
       end

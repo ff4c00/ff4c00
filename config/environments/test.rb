@@ -33,6 +33,8 @@ Rails.application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
+	# 待优化: host参数用正则匹配mailer.yml中的mailer_default_from
+	config.action_mailer.default_url_options = {host: 'gmail.com'}
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
