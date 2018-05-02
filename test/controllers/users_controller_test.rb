@@ -42,10 +42,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 	test '无权限用户尝试发送删除用户请求' do
 		
 		# 未登录用户尝试发起删除请求
-		try_to_delete_user(url: login_url)
+		try_to_delete_user(url: login_path)
 
 		# 非管理员已登录用户尝试发起删除请求
 		log_in_as(@bad_guy)
+		# 测试时报错,提示预期重定向到根路径而实际重定向到了login
+		# 所以我怀疑这里用户用户根本没有登录成功
+		# 测试发现是对的,后来想到固件里面bad_guy的邮箱没有激活所以导致登录失败
+		assert is_logged_in?
 		try_to_delete_user(url: root_path)
 
 	end 

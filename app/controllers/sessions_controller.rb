@@ -11,11 +11,16 @@ class SessionsController < ApplicationController
 
     if @user && bingo_password
 
-      log_in(@user)
-      session[:remember_me] == '1' ? remember(@user) : forget(@user)
-      # user_url(user) #=> "http://localhost:4000/users/7" # 单数并以user为参数是show页面链接
-      # users_url #=> "http://localhost:4000/users" # 复数是user列表页面链接
-      redirect_back_or(user_url(@user))
+			if @user.activated?
+     		log_in(@user)
+       	session[:remember_me] == '1' ? remember(@user) : forget(@user)
+       	# user_url(user) #=> "http://localhost:4000/users/7" # 单数并以user为参数是show页面链接
+       	# users_url #=> "http://localhost:4000/users" # 复数是user列表页面链接
+       	redirect_back_or(user_url(@user))
+			else
+				flash[:warning] = '账户尚未完成激活,激活后即可登录'
+				redirect_to root_path
+			end 
 
     elsif @user
 

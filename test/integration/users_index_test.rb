@@ -52,7 +52,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
 		end
 
  		user_count_change(user: @bad_guy)
-		# 低层命令直接向控制器发送HTTP请求,不允许管理员删除自己
+		# 底层命令直接向控制器发送HTTP请求,不允许管理员删除自己
  	  user_count_change(count: 0, user: @user)
 
 	end 

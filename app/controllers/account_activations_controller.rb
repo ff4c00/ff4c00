@@ -14,7 +14,7 @@ class AccountActivationsController < ApplicationController
 			user.update_attribute(:activated_at, Time.now)
 			log_in user
 			flash[:success] = '账户激活成功!'
-			redirect_to user_path
+			redirect_to user_path(user)
 		else
 			flash[:danger] = (first_message = message[0])[1]
 			redirect_to first_message[0]
