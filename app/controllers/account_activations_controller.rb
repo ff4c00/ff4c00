@@ -10,8 +10,7 @@ class AccountActivationsController < ApplicationController
 		(status_3 = user.authenticated?(attribute: :activation_digest, token: params[:id]) == true) ? nil : message << [root_path, '激活令牌错误!'] 	if status_1
 
 		if (status_1 && (status_2 ||= false) && status_3 ||= false)
-			user.update_attribute(:activated, true)
-			user.update_attribute(:activated_at, Time.now)
+			user.update_columns(activated: true, activated_at: Time.now)
 			log_in user
 			flash[:success] = '账户激活成功!'
 			redirect_to user_path(user)

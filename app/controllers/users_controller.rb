@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 
   def index
 		# 待优化: 分页全局调用统一方法,避免分页条数不一致,后期替换也方便
-		@users = User.page(params[:page]).per(30)
+		@users = User.where(activated: true).page(params[:page]).per(30)
   end
 
 	def destroy
