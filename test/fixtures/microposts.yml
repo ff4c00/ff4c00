@@ -1,9 +1,11 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+haha:
+  content: 'Its just a joke'
+  updated_at: <%= 10.minutes.ago %>
 
-one:
-  content: MyText
-  user: one
+hehe:
+  content: 'Its not funny at all'
+  updated_at: <%= 1.years.ago %>
 
-two:
-  content: MyText
-  user: two
+fine:
+  content: 'well,I admit that I dont have a sense of humor'
+  updated_at: <%= Time.now %>

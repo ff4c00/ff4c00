@@ -1,17 +1,19 @@
 class User < ApplicationRecord
+
+	has_many :microposts
+
   # name字段
   # 待优化: 对name字段进行限制,不允许包含:admin,root,king,queen,fuxi,ff4c00,该用户已注销等保留字
   validates(:name, presence: true, length: {maximum: 50})
   # name字段 end
 
   # email字段
-  email_reg = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   # uniqueness 用于唯一性校验且区分大小写 case_sensitive选项用于是否区分大小写
   # 将uniqueness: true -> uniqueness: {case_sensitive: false} 即可在校验唯一性的同时不区分大小写
   # 推测: uniqueness: true 即为 uniqueness: {case_sensitive: true}的一种简写
   # 待深入: uniqueness 参数这里是怎么实现的?也就是说当case_sensitive指定为false时他是怎么指定将uniqueness为true的?
   # 待优化: 搭建一个邮箱系统
-  validates(:email, presence: true, length: {maximum: 255}, format: {with: email_reg},uniqueness: {case_sensitive: false})
+	validates(:email, presence: true, length: {maximum: 255}, format: {with: eval(Goddess.user.reg_email)},uniqueness: {case_sensitive: false})
   before_save  :downcase_email
 	# email字段 end
 
