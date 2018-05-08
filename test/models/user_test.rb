@@ -84,4 +84,12 @@ class UserTest < ActiveSupport::TestCase
    assert_not @user.authenticated?(attribute: :remember_digest, token: '')
   end
 
+	test 'micropost依赖关系测试' do
+		@user.save
+		@user.microposts.create!(content: 'should be destroyed')
+		assert_difference 'Micropost.count', -1 do 
+			@user.destroy
+		end 
+	end 
+	
 end

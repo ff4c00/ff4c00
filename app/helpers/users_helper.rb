@@ -8,5 +8,9 @@ module UsersHelper
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
     image_tag(gravatar_url, alt: user.name, class: 'gravatar', size: size)
   end
+
+	def head_portrait(user:, path:)
+		link_to gravatar_for(user: user), path
+	end 
 end
 

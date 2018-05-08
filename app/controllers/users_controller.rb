@@ -10,11 +10,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-
-			UserMailer.account_activation(@user).deliver_now 
+			UserMailer.account_activation(@user).deliver_now
       flash[:info] = '请检查邮箱,根据激活邮件提示,完成账户激活:)'
       redirect_to root_path
-
     else
       render 'new'
     end
@@ -22,6 +20,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+		@microposts = @user.microposts.page(params[:page]).per(Goddess.paging_number)
+
   end
 
   def edit
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 
   def index
 		# 待优化: 分页全局调用统一方法,避免分页条数不一致,后期替换也方便
-		@users = User.where(activated: true).page(params[:page]).per(30)
+		@users = User.where(activated: true).page(params[:page]).per(Goddess.paging_number)
   end
 
 	def destroy
@@ -50,12 +50,12 @@ class UsersController < ApplicationController
 			flash[:danger] = '禁止删除本人'
 			redirect_to users_path
 		else
-			@user.destroy 
+			@user.destroy
 			flash[:success] = '用户已删除'
 			redirect_to users_path
 		end
 
-	end 
+	end
 
   private
 
@@ -84,9 +84,9 @@ class UsersController < ApplicationController
       end
     end
 
-				
+
 		def admin_user
 			redirect_to(root_path) unless current_user.admin?
-		end 
+		end
 
 end

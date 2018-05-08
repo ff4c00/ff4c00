@@ -1,0 +1,7 @@
+<li id='micropost-<%= micropost.id %>'>
+	<%micropost_user = micropost.user %>
+	<%= head_portrait(user: micropost_user, path: micropost_user) %>
+	<span class='user'> <%= link_to micropost_user.name, micropost_user %> </span>
+	<span class='content'> <%= micropost.content %> </span>
+	<span class='timestamp'>Posted <%= time_ago_in_words(micropost.updated_at) %> ago </span>
+</li>

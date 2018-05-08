@@ -2,8 +2,13 @@ defaults: &defaults
   micropost:
     # 配置微博正文长度
     text_length: 255
+
   user:
     reg_email: '/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i'
+
+  # 列表分页显示条数
+  paging_number: 30
+
 
 development:
   <<: *defaults

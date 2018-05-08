@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-	has_many :microposts
+	has_many :microposts, dependent: :destroy	
 
   # name字段
   # 待优化: 对name字段进行限制,不允许包含:admin,root,king,queen,fuxi,ff4c00,该用户已注销等保留字
