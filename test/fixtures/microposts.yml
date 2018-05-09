@@ -9,3 +9,15 @@ hehe:
 fine:
   content: 'well,I admit that I dont have a sense of humor'
   updated_at: <%= Time.now %>
+
+who_care:
+  content: 'eating grapes does not spit grape skins'
+  updated_at: <%= 5.days.ago %>
+  # rails 提供了一种便利的方法来在固件中建立关联
+  user: ff4c00
+<% (Goddess.paging_number * 2).times do |index| %>
+micropost_<%= index %>:
+  content: <%= Faker::Lorem.sentence(15) %>
+  updated_at: <%= 2.years.ago %>
+  user: ff4c00
+<% end %>

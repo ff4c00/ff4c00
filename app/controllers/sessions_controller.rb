@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
 
     session = params[:session]
     @user = User.find_by_email(session[:email].downcase)
-    bingo_password = @user&.authenticate(session[:password])
+		bingo_password = @user&.authenticated?(attribute: :password_digest, token: session[:password]) if @user.present? 
 
-    if @user && bingo_password
+    if @user && (bingo_password ||= false)
 
 			if @user.activated?
      		log_in(@user)
