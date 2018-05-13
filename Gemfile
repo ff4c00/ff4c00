@@ -42,6 +42,15 @@ gem 'kaminari', '~> 1.1', '>= 1.1.1'
 # 调用写在YAML里面的配置信息
 gem 'settingslogic', '~> 2.0', '>= 2.0.9'
 
+# 图片上传
+# 图像与模型进行关联
+gem 'carrierwave', '0.11.2'
+# 调整图像尺寸
+gem 'mini_magick', '4.5.1'
+# 生产环境上传图片
+gem 'fog', '1.38.0'
+# 图片上传 end
+
 group :development, :test do
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

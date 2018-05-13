@@ -107,6 +107,10 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token) #或者rescue false
   end
 
+	def feed
+		Micropost.where(user_id: self.id)
+	end 
+
 	private
 
 		def downcase_email

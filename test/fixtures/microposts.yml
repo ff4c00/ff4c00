@@ -15,9 +15,46 @@ who_care:
   updated_at: <%= 5.days.ago %>
   # rails 提供了一种便利的方法来在固件中建立关联
   user: ff4c00
+
 <% (Goddess.paging_number * 2).times do |index| %>
 micropost_<%= index %>:
   content: <%= Faker::Lorem.sentence(15) %>
   updated_at: <%= 2.years.ago %>
   user: ff4c00
 <% end %>
+
+wating:
+  content: 'you are waiting for a train'
+  updated_at: <%= 2.years.ago %>
+  user: bad_guy
+
+away:
+  content: 'a train that will take you far away'
+  updated_at: <%= 2.years.ago %>
+  user: bad_guy 
+
+hope:
+  content: 'you know where you hope this train will take you'
+  updated_at: <%= 2.years.ago %>
+  user: bad_guy 
+
+sure:
+  content: 'but you can not know for sure'
+  updated_at: <%= 2.years.ago %>
+  user: bad_guy 
+
+but:
+  content: 'but it does not matter'
+  updated_at: <%= 2.years.ago %>
+  user: bad_guy
+
+tell_me_why:
+  content: 'now tell me why'
+  updated_at: <%= 2.years.ago %>
+  user: bad_guy
+
+together:
+  content: 'because we will be together'
+  updated_at: <%= 2.years.ago %>
+  user: bad_guy
+

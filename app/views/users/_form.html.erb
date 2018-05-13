@@ -4,7 +4,7 @@
   是通过Active Record提供的new_record?布尔值方法检测用户是新建的还是已经存在于数据库中.
  -->
 <%= form_for(@user) do |f| %>
-  <%= render 'shared/error_messages'%>
+  <%= render 'shared/error_messages', object: f.object%>
 
   <%= f.label :'名称' %>
   <%= f.text_field :name, class: 'form-control'%>

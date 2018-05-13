@@ -2,6 +2,14 @@
 	<%micropost_user = micropost.user %>
 	<%= head_portrait(user: micropost_user, path: micropost_user) %>
 	<span class='user'> <%= link_to micropost_user.name, micropost_user %> </span>
-	<span class='content'> <%= micropost.content %> </span>
+	<span class='content'>
+		<%= micropost.content %>
+		<%#= image_tag micropost.picture.url, width: Goddess.micropost.index_width, height: Goddess.micropost.index_height if micropost.picture? %>
+		<!-- 只对宽度进行限制,不限制高度,即可实现图片等比例缩放-->
+		<%= image_tag micropost.picture.url if micropost.picture? %>
+	</span>
 	<span class='timestamp'>Posted <%= time_ago_in_words(micropost.updated_at) %> ago </span>
+	<% if current_user?(micropost.user) %>
+		<%= link_to Goddess.delete.name, micropost, method: :delete, data: {confirm: Goddess.delete.confirm }%>
+	<% end %>
 </li>

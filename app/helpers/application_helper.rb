@@ -1,4 +1,6 @@
 module ApplicationHelper
+  
+	include GoddessHelper
 
   def full_title(page_title = '')
     base_title = 'ff4c00'
@@ -18,6 +20,5 @@ module ApplicationHelper
   def button_text(text: '提交')
     provide(:button_text, text)
   end
-
 
 end

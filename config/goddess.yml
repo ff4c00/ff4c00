@@ -9,6 +9,21 @@ defaults: &defaults
   # 列表分页显示条数
   paging_number: 30
 
+  delete:
+    name: '删除'
+    confirm: '确定删除吗?'
+
+  # 图片相关设置
+  picture:
+    # 图片格式白名单
+    extension_white_list: ['jpg', 'jpeg', 'gif', 'png']
+    # 上传图片最大字节设置
+    max_size: <%= 5.megabytes %>
+    # 上传图片最大尺寸设置
+    max_width_and_height: [600,600]
+
+
+  use_fog: false
 
 development:
   <<: *defaults
