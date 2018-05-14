@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
 	has_many :microposts, dependent: :destroy	
+	has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
 
   # name字段
   # 待优化: 对name字段进行限制,不允许包含:admin,root,king,queen,fuxi,ff4c00,该用户已注销等保留字
