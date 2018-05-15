@@ -91,5 +91,18 @@ class UserTest < ActiveSupport::TestCase
 			@user.destroy
 		end 
 	end 
+
+	test '关注用户测试' do
+		ff4c00 = users(:ff4c00)
+		bad_guy = users(:bad_guy)
+		assert_not ff4c00.following?(other_user: bad_guy)
+		ff4c00.follow(other_user: bad_guy)
+		assert bad_guy.followers.include?(ff4c00)
+		assert ff4c00.following?(other_user: bad_guy)
+		ff4c00.unfollow(other_user: bad_guy)
+		assert_not ff4c00.following?(other_user: bad_guy)
+	end 
+
+	
 	
 end

@@ -2,9 +2,13 @@ class User < ApplicationRecord
 
 	has_many :microposts, dependent: :destroy	
 	has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
+	has_many :following, through: :active_relationships, source: :followed
+	
+	has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+	has_many :followers, through: :passive_relationships
 
   # name字段
-  # 待优化: 对name字段进行限制,不允许包含:admin,root,king,queen,fuxi,ff4c00,该用户已注销等保留字
+  # 待优化: 对name字段进行限制,不允许包含:admin,root,king,queen,fuxi,ff4c00,bad_guy,该用户已注销等保留字
   validates(:name, presence: true, length: {maximum: 50})
   # name字段 end
 
@@ -111,6 +115,19 @@ class User < ApplicationRecord
 	def feed
 		Micropost.where(user_id: self.id)
 	end 
+
+	def follow(other_user:)
+		self.active_relationships.create(followed_id: other_user.id)
+	end 
+
+	def following?(other_user:)
+		self.following.include?(other_user)
+	end
+
+	def unfollow(other_user:)
+		self.active_relationships.find_by(followed_id: other_user.id).destroy if self.following?(other_user: other_user)
+	end	
+
 
 	private
 
