@@ -1,0 +1,17 @@
+<% @user ||= current_user %>
+<div class='stats'>
+
+	<%= link_to following_user_path(@user) do %>
+		<strong id='following' class='stat'>
+			<%= @user.following.count %>
+		</strong>
+		关注
+	<% end %>
+
+	<%= link_to followers_user_path(@user) do %>
+		<strong id='followers' class='stat'>
+			<%= @user.followers.count %>
+		</strong>
+		粉丝
+	<% end %>
+</div>

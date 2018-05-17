@@ -55,4 +55,15 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 	end 
 
 
+	test '未登录用户查看已关注和粉丝列表将重定向到登录页面' do 
+		
+		get following_user_path(@user)
+		assert_redirected_to login_url
+
+		get followers_user_path(@user)
+		assert_redirected_to login_url
+
+	end 
+
+
 end

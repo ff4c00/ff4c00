@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
+  before_action :logged_in_user, only: [:edit, :update, :index, :destroy, :following, :followers]
   before_action :correct_user, only: [:edit, :update]
 	before_action :admin_user, only: :destroy
 
@@ -53,6 +53,20 @@ class UsersController < ApplicationController
 			@user.destroy
 			flash[:success] = '用户已删除'
 			redirect_to users_path
+		end
+
+		def following
+			@title = '已关注'
+			@user = User.find_by(id: params[:id])
+			@users = @user.following.page(params[:page]).per(Goddess.paging_number)
+			render 'show_follow'
+		end
+
+		def followers
+			@title = '粉丝'
+			@user = User.find_by(id: params[:id])
+			@users = @user.followers.page(params[:page]).per(Goddess.paging_number)
+			render 'show_follow'
 		end
 
 	end
