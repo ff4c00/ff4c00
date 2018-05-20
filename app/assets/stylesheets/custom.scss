@@ -101,7 +101,12 @@ a {
 
 // 侧边栏样式
 aside {
-  section.user_info { margin-top: 20px; }
+  section.user_info {
+    margin-top: 20px;
+    h1 {
+      font-size: 3.1em;
+    }
+  }
   section {
     padding: 10px 0;
     margin-top: 20px;
@@ -115,11 +120,11 @@ aside {
       line-height: 1px;
     }
     h1 {
-      font-size: 1.4em;
+      font-size: 1.1em;
       text-align: left;
       letter-spacing: -1px;
       margin-bottom: 3px;
-      margin-top: opx;
+      margin-top: 0px;
     }
   }
 }
@@ -186,18 +191,22 @@ input { height: auto !important;}
 //博客样式
 .microposts {
 	list-style: none;
-	padding: 0;
+  padding: 0;
+  a {
+    font-size: 1.5em;
+  }
 	li {
 		padding: 10px 0;
 		border-top: 1px solid #e8e8e8;
 	}
-	.user {
+	.title {
 		margin-top: 5em;
 		padding-top: 0;
 	}
 	.content {
 		display: block;
-		margin-left: 60px;
+    margin-left: 60px;
+    font-size: 1.5em;
 		img {
 			display: block;
 			padding: 5px 0;
@@ -205,7 +214,7 @@ input { height: auto !important;}
 	}
 	.timestamp {
 		color: $gray-light;
-		display: block;
+		// display: block;
 		margin-left: 60px;
 	}
 	.gravatar {
@@ -229,7 +238,7 @@ span .picture {
 		border: 0;
 	}
 }
-//博客样式 end 
+//博客样式 end
 
 //关注统计
 

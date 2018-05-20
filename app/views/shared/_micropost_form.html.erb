@@ -1,9 +1,9 @@
-<% button_text(text: '创建博客') %>
 <%= form_for(@micropost, html:{multipart: true}) do |f| %>
 	<%= render 'shared/error_messages', object: f.object%>
 	<div>
-		<%= f.text_area :content, placeholder: '新建博客...'%>
-  	<%= f.submit yield(:button_text), class: 'btn btn-primary' %>
+		<%= f.text_field :title, style:'background-color:#fcfded;', placeholder: '文章标题'%>
+		<%= f.text_area :content, style:'height:379px; background-color:#fcfded;', placeholder: '此刻你在想些什么...'%>
+  	<%= f.submit '保存', class: 'btn btn-primary' %>
 		<!--使用accept限制文件格式-->
 		<%= f.file_field :picture, accept: Goddess.picture.extension_white_list.map{|type| 'image/'+type }.join(',') %>
 	</div>

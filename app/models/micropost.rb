@@ -7,7 +7,7 @@ class Micropost < ApplicationRecord
 
 	# 图片大小校验
 	validate :picture_size
-	
+
 	# 我最初写这个项目的时候只是想跟着大佬一步步的把项目很多平时接触不到的基础东西学一边
 	# 现在我有了其他的想法,其实要想写好或者说是具有参考价值的一篇文章和一个项目是一样的
 	# 都需要去不断的去维护和修改
@@ -20,11 +20,15 @@ class Micropost < ApplicationRecord
 	# 就像完整的代码版本控制工具那样
 	default_scope -> {order(updated_at: :desc)}
 
+	# 通过gem default_value_for 为文章标题设置默认值
+	default_value_for :title, Time.now.strftime(Goddess.time.format_Ymd) if Goddess.micropost.use_default_title
+
+
 	private
 		def picture_size
 			if self.picture.size > (max_size = Goddess.picture.max_size)
 				errors.add(:picture, "图片大小应小于#{ b_to_mb(num: max_size)}")
-			end 
-		end 
-	
+			end
+		end
+
 end

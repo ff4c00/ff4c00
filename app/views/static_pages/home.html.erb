@@ -1,13 +1,12 @@
 <% provide(:title, '首页')%>
-<div class="center jumbotron">
-	<h1>ff4c00</h1>
+<div class=" jumbotron">
 	<% if logged_in? %>
 		<%= render 'user_micropost'%>
 	<% else %>
 	  <h2>
 	    这里本来是应该有一行文字的,就是特别文艺的那种.你脑海中想到的那句是什么?欢迎留言告诉我.
 	  </h2>
-	
+
 		<%= link_to "立即注册", signup_path, class: "btn btn-lg btn-primary"%>
 	<% end %>
 </div>

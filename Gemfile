@@ -6,7 +6,7 @@ gem 'rails', '~> 5.0.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+#gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -50,6 +50,13 @@ gem 'mini_magick', '4.5.1'
 # 生产环境上传图片
 gem 'fog', '1.38.0'
 # 图片上传 end
+
+# 默认值
+gem "default_value_for"
+
+# markdown
+gem 'redcarpet'
+gem 'coderay'
 
 group :development, :test do
 

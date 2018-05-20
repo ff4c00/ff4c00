@@ -1,7 +1,8 @@
 defaults: &defaults
   micropost:
     # 配置微博正文长度
-    text_length: 255
+    text_length: 65535
+    use_default_title: false
 
   user:
     reg_email: '/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i'
@@ -21,6 +22,10 @@ defaults: &defaults
     max_size: <%= 5.megabytes %>
     # 上传图片最大尺寸设置
     max_width_and_height: [600,600]
+
+  # 格式化时间
+  time:
+    format_Ymd: '%Y年%m月%d日'
 
 
   use_fog: false

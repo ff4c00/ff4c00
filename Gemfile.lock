@@ -66,6 +66,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
+    default_value_for (3.0.2)
+      activerecord (>= 3.2.0, < 5.1)
     erubis (2.7.0)
     excon (0.62.0)
     execjs (2.7.0)
@@ -273,7 +275,6 @@ GEM
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    puma (3.11.3)
     rack (2.0.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -313,6 +314,7 @@ GEM
       json (>= 1.8)
       nokogiri (~> 1.5)
       trollop (~> 2.1)
+    redcarpet (3.3.4)
     ruby-progressbar (1.9.0)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
@@ -369,7 +371,9 @@ DEPENDENCIES
   bootstrap-sass (= 3.3.6)
   byebug
   carrierwave (= 0.11.2)
+  coderay
   coffee-rails (~> 4.2)
+  default_value_for
   faker (= 1.6.3)
   fog (= 1.38.0)
   guard (= 2.13.0)
@@ -380,9 +384,9 @@ DEPENDENCIES
   listen (~> 3.0.5)
   mini_magick (= 4.5.1)
   minitest-reporters (= 1.1.9)
-  puma (~> 3.0)
   rails (~> 5.0.0)
   rails-controller-testing (= 0.1.1)
+  redcarpet
   sass-rails (~> 5.0)
   settingslogic (~> 2.0, >= 2.0.9)
   spring
