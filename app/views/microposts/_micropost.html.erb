@@ -11,5 +11,6 @@
 	<span class='timestamp'>Posted <%= time_ago_in_words(micropost.updated_at) %> ago </span>
 	<% if current_user?(micropost.user) %>
 		<%= link_to Goddess.delete.name, micropost, style: 'font-size: 12px;', method: :delete, data: {confirm: Goddess.delete.confirm }%>
+		<%= link_to Goddess.update.name, edit_micropost_path(micropost), style: 'font-size: 12px;' %>
 	<% end %>
 </li>

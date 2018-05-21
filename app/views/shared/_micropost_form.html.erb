@@ -1,3 +1,8 @@
+<!--
+  new页面和edit页面使用了相同的form_for(@micropost)
+  Rails是怎么知道创建文章要发送POST请求,修改文章发送PATCH请求:
+  是通过Active Record提供的new_record?布尔值方法检测文章是新建的还是已经存在于数据库中.
+ -->
 <%= form_for(@micropost, html:{multipart: true}) do |f| %>
 	<%= render 'shared/error_messages', object: f.object%>
 	<div>

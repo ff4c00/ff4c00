@@ -2,7 +2,7 @@ defaults: &defaults
   micropost:
     # 配置微博正文长度
     text_length: 65535
-    use_default_title: false
+    use_default_title: true
 
   user:
     reg_email: '/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i'
@@ -13,6 +13,8 @@ defaults: &defaults
   delete:
     name: '删除'
     confirm: '确定删除吗?'
+  update:
+    name: '修改'
 
   # 图片相关设置
   picture:

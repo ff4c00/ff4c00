@@ -21,8 +21,11 @@ class Micropost < ApplicationRecord
 	default_scope -> {order(updated_at: :desc)}
 
 	# 通过gem default_value_for 为文章标题设置默认值
-	default_value_for :title, Time.now.strftime(Goddess.time.format_Ymd) if Goddess.micropost.use_default_title
-
+	# default_value_for :title, Time.now.strftime(Goddess.time.format_Ymd) if Goddess.micropost.use_default_title
+	
+	before_save do
+		default_title
+	end 
 
 	private
 		def picture_size
@@ -30,5 +33,11 @@ class Micropost < ApplicationRecord
 				errors.add(:picture, "图片大小应小于#{ b_to_mb(num: max_size)}")
 			end
 		end
+
+		def default_title
+			if self.title.blank? && Goddess.micropost.use_default_title
+				self.title = Time.now.strftime(Goddess.time.format_Ymd)
+			end 
+		end 
 
 end
