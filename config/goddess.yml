@@ -30,6 +30,7 @@ defaults: &defaults
     format_Ymd: '%Y年%m月%d日'
 
 
+  # 是否使用云存储
   use_fog: false
 
 development:
