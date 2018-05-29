@@ -9,8 +9,9 @@ $a_default_color: #555;
 $a_hover_default_color: #777;
 
 body {
-  padding-top: 60px;
-  margin: 0 20%;
+  // padding-top: 60px;
+  // margin: 0 20%;
+  z-index: 100;
 }
 
 section { overflow: auto; }
