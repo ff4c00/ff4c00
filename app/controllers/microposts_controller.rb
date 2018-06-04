@@ -6,12 +6,13 @@ class MicropostsController < ApplicationController
 		@micropost = current_user.microposts.build(micropost_params)
 		if @micropost.save
 			flash[:success] = '创建成功.'
-			redirect_to root_url
+			redirect_to root_url unless params[:ajax_post] ||= false
 		else
 			@feed_items = []
 			flash[:danger] = @micropost.errors.full_messages.join(',')
 			redirect_to root_url
 		end
+		render json: {'success' => true, 'message' => '创建成功.' } if params[:ajax_post] ||= false
 	end
 
 	def destroy
@@ -25,9 +26,9 @@ class MicropostsController < ApplicationController
 	end
 
 	def update
-		microposts.find(params[:id]).update(micropost_params)	
+		microposts.find(params[:id]).update(micropost_params)
 		redirect_to root_url
-	end 
+	end
 
 	private
 
@@ -42,5 +43,5 @@ class MicropostsController < ApplicationController
 
 		def microposts
 			current_user.microposts
-		end 
+		end
 end

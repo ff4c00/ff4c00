@@ -1,5 +1,5 @@
 module ApplicationHelper
-  
+
 	include GoddessHelper
 
   def full_title(page_title = '')
@@ -29,9 +29,8 @@ module ApplicationHelper
 	end
 
 	def markdown(text)
-
-	  options = {   
-	    :autolink => true, 
+	  options = {
+	    :autolink => true,
 	    :space_after_headers => true,
 			:fenced_code_blocks => true,
 	    :no_intra_emphasis => true,
@@ -44,10 +43,12 @@ module ApplicationHelper
 
 		markdown = Redcarpet::Markdown.new(renderer, options)
 	  markdown.render(text).html_safe
-
 	end
 
 	# 页面markdown语法及高亮 end
-	
+
+	def link_to_void(*args, &block)
+    link_to(*args.insert((block_given? ? 0 : 1), "javascript:void(0);"), &block)
+  end
 
 end

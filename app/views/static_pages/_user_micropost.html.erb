@@ -9,7 +9,8 @@
 		</section>
 
 		<section class='micropost_form'>
-			<%= render 'shared/micropost_form'%>
+			<%#= render 'shared/micropost_form'%>
+			<%= link_to_void "新建文章", onclick: "write_new_micropost('#{current_user.id}')" %>
 		</section>
 	</aside>
 	<div class='col-md-8'>
@@ -17,3 +18,66 @@
 		<%= render 'shared/feed'%>
 	</div>
 </div>
+<input type="hidden" id="micropost_url" value="<%= microposts_path %>"/>
+<input type="hidden" id="dialog_content" value="<%= '
+<div>
+	<input style="background-color:#fcfded;" placeholder="文章标题" type="text" name="micropost[title]" id="micropost_title">
+	<textarea style="height:379px; background-color:#fcfded;" placeholder="此刻你在想些什么..." name="micropost[content]" id="micropost_content">
+	</textarea>
+	<!--使用accept限制文件格式-->
+	<input accept="image/jpg,image/jpeg,image/gif,image/png" type="file" name="micropost[picture]" id="micropost_picture">
+</div>
+	' %>"/>
+
+<script type="text/javascript">
+function write_new_micropost(user_id) {
+	var origin_title, micropost_title, micropost_content,micropost_url, dia_log;
+	origin_title = '新建文章';
+	micropost_title = $("#micropost_title").val();
+	micropost_content = $("#micropost_content").val();
+	micropost_url = $("#micropost_url").val();
+  dia_log = dialog({
+    title: origin_title,
+    content:  $("#dialog_content").val(),
+    okValue: '确定',
+    ok: function () {
+			var micropost_content = $("#micropost_content").val();
+			var micropost_title = $("#micropost_title").val();
+			var micropost_picture = $("#micropost_picture").val();
+      if($.isEmptyObject(micropost_content)){
+        alert("请输入文章内容.");
+        return false;
+      }
+
+      this.title('提交中…');
+      $.ajax({
+        type: "post",
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        url: micropost_url,
+        data: {'micropost': {'title' : micropost_title, 'content': micropost_content, 'picture': micropost_picture}, 'ajax_post': true},
+        beforeSend: function(XMLHttpRequest) {
+
+        },
+        success: function(data, textStatus) {
+          if (data.success) {
+            alert(data.message);
+          }else{
+            alert(data.message);
+          }
+        },
+        complete: function(XMLHttpRequest, textStatus) {
+          dia_log.remove();
+        },
+        error: function() {
+          alert('系统错误，请刷新页面重试');
+        }
+      });
+
+      return false;
+    },
+    cancelValue: '取消',
+    cancel: function () {}
+  });
+  dia_log.show();
+};
+</script>
